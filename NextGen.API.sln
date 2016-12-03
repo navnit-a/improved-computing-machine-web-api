@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextGen.API", "NextGen.API\NextGen.API.csproj", "{C73F81D3-39EC-4913-94B5-B3EE9469B118}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextGen.API", "NextGen.API\NextGen.API.csproj", "{044ED077-AD68-45D2-BD8E-71419E3B39A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C73F81D3-39EC-4913-94B5-B3EE9469B118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C73F81D3-39EC-4913-94B5-B3EE9469B118}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C73F81D3-39EC-4913-94B5-B3EE9469B118}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C73F81D3-39EC-4913-94B5-B3EE9469B118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044ED077-AD68-45D2-BD8E-71419E3B39A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044ED077-AD68-45D2-BD8E-71419E3B39A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044ED077-AD68-45D2-BD8E-71419E3B39A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044ED077-AD68-45D2-BD8E-71419E3B39A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

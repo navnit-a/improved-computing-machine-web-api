@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextGen.API", "NextGen.API\NextGen.API.csproj", "{044ED077-AD68-45D2-BD8E-71419E3B39A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Licenses.DataAccess", "Licenses.DataAccess\Licenses.DataAccess.csproj", "{D94E2AB0-3512-44F6-A18D-C6EC04F609CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{044ED077-AD68-45D2-BD8E-71419E3B39A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{044ED077-AD68-45D2-BD8E-71419E3B39A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{044ED077-AD68-45D2-BD8E-71419E3B39A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D94E2AB0-3512-44F6-A18D-C6EC04F609CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D94E2AB0-3512-44F6-A18D-C6EC04F609CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D94E2AB0-3512-44F6-A18D-C6EC04F609CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D94E2AB0-3512-44F6-A18D-C6EC04F609CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

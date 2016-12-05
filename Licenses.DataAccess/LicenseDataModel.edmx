@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LicensesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Colour">
+          <Key>
+            <PropertyRef Name="ColorId" />
+          </Key>
+          <Property Name="ColorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColourName" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ColourID" Type="int" />
+        </EntityType>
+        <EntityType Name="LicenseKeys">
+          <Key>
+            <PropertyRef Name="LicenseKeyId" />
+          </Key>
+          <Property Name="LicenseKeyId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicenseKey" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsActivated" Type="bit" Nullable="false" />
+          <Property Name="IsAssigned" Type="bit" Nullable="false" />
+          <Property Name="AssignedOn" Type="datetime" />
+          <Property Name="ActivatedOn" Type="datetime" />
+          <Property Name="LicenseUserId" Type="bigint" />
+          <Property Name="LicenseTypeId" Type="int" Nullable="false" />
+          <Property Name="ActivatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LicenseTypes">
+          <Key>
+            <PropertyRef Name="LicenseTypeId" />
+          </Key>
+          <Property Name="LicenseTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LicenseUsers">
+          <Key>
+            <PropertyRef Name="LicenseUserId" />
+          </Key>
+          <Property Name="LicenseUserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Employees_Colour">
+          <End Role="Colour" Type="Self.Colour" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colour">
+              <PropertyRef Name="ColorId" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="ColourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LicenseKeys_LicenseTypes">
+          <End Role="LicenseTypes" Type="Self.LicenseTypes" Multiplicity="1" />
+          <End Role="LicenseKeys" Type="Self.LicenseKeys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenseTypes">
+              <PropertyRef Name="LicenseTypeId" />
+            </Principal>
+            <Dependent Role="LicenseKeys">
+              <PropertyRef Name="LicenseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LicenseKeys_LicenseUsers">
+          <End Role="LicenseUsers" Type="Self.LicenseUsers" Multiplicity="0..1" />
+          <End Role="LicenseKeys" Type="Self.LicenseKeys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenseUsers">
+              <PropertyRef Name="LicenseUserId" />
+            </Principal>
+            <Dependent Role="LicenseKeys">
+              <PropertyRef Name="LicenseUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LicensesModelStoreContainer">
+          <EntitySet Name="Colour" EntityType="Self.Colour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicenseKeys" EntityType="Self.LicenseKeys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicenseTypes" EntityType="Self.LicenseTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicenseUsers" EntityType="Self.LicenseUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employees_Colour" Association="Self.FK_Employees_Colour">
+            <End Role="Colour" EntitySet="Colour" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LicenseKeys_LicenseTypes" Association="Self.FK_LicenseKeys_LicenseTypes">
+            <End Role="LicenseTypes" EntitySet="LicenseTypes" />
+            <End Role="LicenseKeys" EntitySet="LicenseKeys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LicenseKeys_LicenseUsers" Association="Self.FK_LicenseKeys_LicenseUsers">
+            <End Role="LicenseUsers" EntitySet="LicenseUsers" />
+            <End Role="LicenseKeys" EntitySet="LicenseKeys" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LicensesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LicenseKey">
+          <Key>
+            <PropertyRef Name="LicenseKeyId" />
+          </Key>
+          <Property Name="LicenseKeyId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicenseKey1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActivated" Type="Boolean" Nullable="false" />
+          <Property Name="IsAssigned" Type="Boolean" Nullable="false" />
+          <Property Name="AssignedOn" Type="DateTime" Precision="3" />
+          <Property Name="ActivatedOn" Type="DateTime" Precision="3" />
+          <Property Name="LicenseUserId" Type="Int64" />
+          <Property Name="LicenseTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ActivatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LicenseType" Relationship="Self.FK_LicenseKeys_LicenseTypes" FromRole="LicenseKeys" ToRole="LicenseTypes" />
+          <NavigationProperty Name="LicenseUser" Relationship="Self.FK_LicenseKeys_LicenseUsers" FromRole="LicenseKeys" ToRole="LicenseUsers" />
+        </EntityType>
+        <EntityType Name="LicenseType">
+          <Key>
+            <PropertyRef Name="LicenseTypeId" />
+          </Key>
+          <Property Name="LicenseTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LicenseKeys" Relationship="Self.FK_LicenseKeys_LicenseTypes" FromRole="LicenseTypes" ToRole="LicenseKeys" />
+        </EntityType>
+        <EntityType Name="LicenseUser">
+          <Key>
+            <PropertyRef Name="LicenseUserId" />
+          </Key>
+          <Property Name="LicenseUserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LicenseKeys" Relationship="Self.FK_LicenseKeys_LicenseUsers" FromRole="LicenseUsers" ToRole="LicenseKeys" />
+        </EntityType>
+        <Association Name="FK_LicenseKeys_LicenseTypes">
+          <End Role="LicenseTypes" Type="Self.LicenseType" Multiplicity="1" />
+          <End Role="LicenseKeys" Type="Self.LicenseKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenseTypes">
+              <PropertyRef Name="LicenseTypeId" />
+            </Principal>
+            <Dependent Role="LicenseKeys">
+              <PropertyRef Name="LicenseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LicenseKeys_LicenseUsers">
+          <End Role="LicenseUsers" Type="Self.LicenseUser" Multiplicity="0..1" />
+          <End Role="LicenseKeys" Type="Self.LicenseKey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenseUsers">
+              <PropertyRef Name="LicenseUserId" />
+            </Principal>
+            <Dependent Role="LicenseKeys">
+              <PropertyRef Name="LicenseUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LicensesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LicenseKeys" EntityType="Self.LicenseKey" />
+          <EntitySet Name="LicenseTypes" EntityType="Self.LicenseType" />
+          <EntitySet Name="LicenseUsers" EntityType="Self.LicenseUser" />
+          <AssociationSet Name="FK_LicenseKeys_LicenseTypes" Association="Self.FK_LicenseKeys_LicenseTypes">
+            <End Role="LicenseTypes" EntitySet="LicenseTypes" />
+            <End Role="LicenseKeys" EntitySet="LicenseKeys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LicenseKeys_LicenseUsers" Association="Self.FK_LicenseKeys_LicenseUsers">
+            <End Role="LicenseUsers" EntitySet="LicenseUsers" />
+            <End Role="LicenseKeys" EntitySet="LicenseKeys" />
+          </AssociationSet>
+          <EntitySet Name="Employees" EntityType="LicensesModel.Employee" />
+          <EntitySet Name="Colours" EntityType="LicensesModel.Colour" />
+          <AssociationSet Name="FK_Employees_Colour" Association="LicensesModel.FK_Employees_Colour">
+            <End Role="Colour" EntitySet="Colours" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ColourID" Type="Int32" />
+          <NavigationProperty Name="Colour" Relationship="LicensesModel.FK_Employees_Colour" FromRole="Employee" ToRole="Colour" />
+        </EntityType>
+        <EntityType Name="Colour">
+          <Key>
+            <PropertyRef Name="ColorId" />
+          </Key>
+          <Property Name="ColorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColourName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="LicensesModel.FK_Employees_Colour" FromRole="Colour" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Employees_Colour">
+          <End Type="LicensesModel.Colour" Role="Colour" Multiplicity="0..1" />
+          <End Type="LicensesModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colour">
+              <PropertyRef Name="ColorId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="ColourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LicensesModelStoreContainer" CdmEntityContainer="LicensesEntities">
+          <EntitySetMapping Name="LicenseKeys">
+            <EntityTypeMapping TypeName="LicensesModel.LicenseKey">
+              <MappingFragment StoreEntitySet="LicenseKeys">
+                <ScalarProperty Name="LicenseKeyId" ColumnName="LicenseKeyId" />
+                <ScalarProperty Name="LicenseKey1" ColumnName="LicenseKey" />
+                <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+                <ScalarProperty Name="IsAssigned" ColumnName="IsAssigned" />
+                <ScalarProperty Name="AssignedOn" ColumnName="AssignedOn" />
+                <ScalarProperty Name="ActivatedOn" ColumnName="ActivatedOn" />
+                <ScalarProperty Name="LicenseUserId" ColumnName="LicenseUserId" />
+                <ScalarProperty Name="LicenseTypeId" ColumnName="LicenseTypeId" />
+                <ScalarProperty Name="ActivatedBy" ColumnName="ActivatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LicenseTypes">
+            <EntityTypeMapping TypeName="LicensesModel.LicenseType">
+              <MappingFragment StoreEntitySet="LicenseTypes">
+                <ScalarProperty Name="LicenseTypeId" ColumnName="LicenseTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LicenseUsers">
+            <EntityTypeMapping TypeName="LicensesModel.LicenseUser">
+              <MappingFragment StoreEntitySet="LicenseUsers">
+                <ScalarProperty Name="LicenseUserId" ColumnName="LicenseUserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="LicensesModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="ColourID" ColumnName="ColourID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colours">
+            <EntityTypeMapping TypeName="LicensesModel.Colour">
+              <MappingFragment StoreEntitySet="Colour">
+                <ScalarProperty Name="ColourName" ColumnName="ColourName" />
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
